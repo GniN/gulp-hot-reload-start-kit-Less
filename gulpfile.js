@@ -15,7 +15,11 @@ gulp.task('browser-sync', function() {
 gulp.task('less', function () {
 	return gulp.src('./less/*.less')
 	.pipe(cache('lessing'))
-	.pipe(less({}))
+	.pipe(less({
+	}).on('error', function(err){
+	        console.log(err.toString());
+	        this.emit('end');
+    }))
 	.pipe(pixrem({
 		rootValue: '10px',
 		atrules: true,
